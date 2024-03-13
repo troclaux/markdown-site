@@ -24,6 +24,10 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(
             n.to_html(), '<p id="main" href="app.com">Text in paragraph</p>')
 
+    def test_to_html_without_props(self):
+        n = LeafNode(tag="p", value="Text in paragraph")
+        self.assertEqual(n.to_html(), '<p>Text in paragraph</p>')
+
 
 if __name__ == "__main__":
     unittest.main()

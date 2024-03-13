@@ -15,8 +15,9 @@ class LeafNode(HTMLNode):
 
         html_str = f'<{self.tag}'
 
-        for prop_key in self.props:
-            html_str += f' {prop_key}="{self.props[prop_key]}"'
+        if self.props is not None:
+            for prop_key in self.props:
+                html_str += f' {prop_key}="{self.props[prop_key]}"'
 
         html_str += f'>{self.value}</{self.tag}>'
         return html_str
