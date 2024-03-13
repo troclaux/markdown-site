@@ -28,6 +28,10 @@ class TestTextNode(unittest.TestCase):
         n = LeafNode(tag="p", value="Text in paragraph")
         self.assertEqual(n.to_html(), '<p>Text in paragraph</p>')
 
+    def test_tagless(self):
+        n = LeafNode(tag=None, value="Text in paragraph")
+        self.assertEqual(n.to_html(), 'Text in paragraph')
+
 
 if __name__ == "__main__":
     unittest.main()
