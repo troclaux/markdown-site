@@ -68,8 +68,6 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                     res.append(TextNode(curr_text, text_type))
     return res
 
-# extract_markdown_images(node.text) returns a list of tuples
-# extract_markdown_links(node.text) returns a list of tuples
 
 def split_nodes_image(old_nodes):
     new_nodes = []
