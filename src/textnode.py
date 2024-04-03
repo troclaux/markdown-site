@@ -1,4 +1,5 @@
 from leafnode import LeafNode
+from extract_markdown import *
 
 text_type_text = "text"
 text_type_bold = "bold"
