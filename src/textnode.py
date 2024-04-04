@@ -55,17 +55,20 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
         split_text = node.text.split(delimiter)
 
-        if (len(split_text) % 2) != 1:
+        if len(split_text) == 1:
+            res.append(node)
+        elif (len(split_text) % 2) == 0:
             err_msg = f'{text_type} delimiter not closed ({delimiter})'
             raise Exception(err_msg)
-
-        if len(split_text) > 1:
+        elif (len(split_text) % 2) == 1:
             for idx in range(0, len(split_text)):
                 curr_text = split_text[idx]
                 if (idx % 2 == 0) and (curr_text != ''):
                     res.append(TextNode(curr_text, text_type_text))
                 elif (idx % 2 == 1) and (curr_text != ''):
                     res.append(TextNode(curr_text, text_type))
+        else:
+            raise Exception('Invalid split_text length')
     return res
 
 
