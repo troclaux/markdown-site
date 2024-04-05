@@ -25,3 +25,12 @@ class TestTextNode(unittest.TestCase):
     def test_link_extractions_without_link(self):
         input = "This is text with no links"
         self.assertEqual(extract_markdown_links(input), [])
+
+    def test_markdown_to_blocks(self):
+        input = "   This is a paragraph\n\nThis is another paragraph  \n\nThis is a third paragraph\n\n"
+        expected_result = [
+            "This is a paragraph",
+            "This is another paragraph",
+            "This is a third paragraph",
+        ]
+        self.assertEqual(markdown_to_blocks(input), expected_result)
