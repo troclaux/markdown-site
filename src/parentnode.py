@@ -9,6 +9,9 @@ class ParentNode(HTMLNode):
         if self.tag is None:
             raise ValueError("ParentNode's tag is None")
 
+        if self.children is None:
+            raise ValueError("ParentNode's children is None")
+
         res = '<' + self.tag + '>'
 
         for child in self.children:
