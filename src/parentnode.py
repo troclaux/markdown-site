@@ -12,10 +12,12 @@ class ParentNode(HTMLNode):
         if self.children is None:
             raise ValueError("ParentNode's children is None")
 
-        res = '<' + self.tag + '>'
+        res = "<" + self.tag + ">"
 
         for child in self.children:
-            res += child.to_html()
-
-        res += '</' + self.tag + '>'
+            if isinstance(child, str):
+                res += child
+            else:
+                res += child.to_html()
+        res += "</" + self.tag + ">"
         return res
