@@ -13,9 +13,10 @@ def markdown_to_blocks(markdown):
     res = []
     blocks = markdown.split("\n\n")
     for block in blocks:
-        if block == "":
-            continue
-        res.append(block.strip())
+        if block != "":
+            res.append(block.strip())
+    if res[-1] == "":
+        res.pop()
     return res
 
 def block_to_block_type(block):
