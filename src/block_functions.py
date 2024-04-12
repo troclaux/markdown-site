@@ -28,7 +28,7 @@ def block_to_block_type(block):
         return block_type_quote
     elif block.startswith("- "):
         return block_type_unordered_list
-    elif block[0].isdigit() and block[1] == ".":
+    elif block.startswith("1. "):
         return block_type_ordered_list
     else:
         return block_type_paragraph
