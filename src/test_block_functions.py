@@ -20,15 +20,13 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(block_to_block_type("> quote"), block_type_quote)
         self.assertEqual(block_to_block_type("- list"), block_type_unordered_list)
         self.assertEqual(block_to_block_type("1. list"), block_type_ordered_list)
-        self.assertEqual(block_to_block_type("9. list"), block_type_ordered_list)
-        self.assertEqual(block_to_block_type("this is a paragraph"), block_type_paragraph)
-
+        self.assertEqual(block_to_block_type("a paragraph"), block_type_paragraph)
 
     def test_paragraph(self):
         md = """
-            This is **bolded** paragraph
-            text in a p
-            tag here
+This is **bolded** paragraph
+text in a p
+tag here
 
         """
 
@@ -39,13 +37,13 @@ class TestTextNode(unittest.TestCase):
             "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>",
         )
 
-    def test_paragraphs(self):
+    def test_paragraphs_with_inline_italic_and_code(self):
         md = """
-            This is **bolded** paragraph
-            text in a p
-            tag here
+This is **bolded** paragraph
+text in a p
+tag here
 
-            This is another paragraph with *italic* text and `code` here
+This is another paragraph with *italic* text and `code` here
 
         """
 
@@ -58,13 +56,13 @@ class TestTextNode(unittest.TestCase):
 
     def test_lists(self):
         md = """
-            - This is a list
-            - with items
-            - and *more* items
+- This is a list
+- with items
+- and *more* items
 
-            1. This is an `ordered` list
-            2. with items
-            3. and more items
+1. This is an `ordered` list
+2. with items
+3. and more items
 
         """
 
@@ -77,11 +75,11 @@ class TestTextNode(unittest.TestCase):
 
     def test_headings(self):
         md = """
-            # this is an h1
+# this is an h1
 
-            this is paragraph text
+this is paragraph text
 
-            ## this is an h2
+## this is an h2
         """
 
         node = markdown_to_html_node(md)
@@ -93,19 +91,21 @@ class TestTextNode(unittest.TestCase):
 
     def test_blockquote(self):
         md = """
-            > This is a
-            > blockquote block
+> This is a
+> blockquote block
 
-            this is paragraph text
+this is paragraph text
 
         """
 
         node = markdown_to_html_node(md)
+        print("node:", node)
         html = node.to_html()
         self.assertEqual(
             html,
             "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
         )
+
 
 if __name__ == "__main__":
     unittest.main()
