@@ -70,7 +70,15 @@ def convert_code_block_to_htmlnode(block):
 def convert_quote_block_to_htmlnode(block):
     if block_to_block_type(block) != block_type_quote:
         raise ValueError(f"Block is not a quote: {block}")
-    return HTMLNode("blockquote", block)
+    lines = block.split("\n")
+    joined_lines = ""
+    for line in lines:
+        if line[:2] == "> ":
+            joined_lines += line[1:]
+    # block = " ".join(lines)
+    children = convert_text_to_children(joined_lines[1:])
+    return ParentNode("blockquote", children)
+
 
 def convert_unordered_list_to_htmlnode(block):
     if block_to_block_type(block) != block_type_unordered_list:
