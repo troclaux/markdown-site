@@ -2,7 +2,10 @@ class HTMLNode:
     def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag
         self.value = value
-        self.children = children
+        if children is not None:
+            self.children = children
+        else:
+            self.children = []
         self.props = props
 
     def to_html(self):
