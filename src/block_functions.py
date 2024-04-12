@@ -33,10 +33,24 @@ def block_to_block_type(block):
     else:
         return block_type_paragraph
 
+
+def convert_text_to_children(text):
+    text_nodes = text_to_textnodes(text)
+    children = []
+    for text_node in text_nodes:
+        leaf_node = text_node_to_leaf_node(text_node)
+        children.append(leaf_node)
+    return children
+
+
 def convert_paragraph_block_to_htmlnode(block):
     if block_to_block_type(block) != block_type_paragraph:
         raise ValueError(f"Block is not a paragraph: {block}")
-    return HTMLNode("p", block)
+    lines = block.split("\n")
+    paragraph = " ".join(lines)
+    children = convert_text_to_children(paragraph)
+    return ParentNode("p", children)
+
 
 def convert_heading_block_to_htmlnode(block):
     if block_to_block_type(block) != block_type_heading:
