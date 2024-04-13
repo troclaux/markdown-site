@@ -99,25 +99,14 @@ def convert_unordered_list_to_htmlnode(block):
 def convert_ordered_list_to_htmlnode(block):
     if block_to_block_type(block) != block_type_ordered_list:
         raise ValueError(f"Block is not an ordered list: {block}")
-    children = []
-    for line in block.split("\n"):
-        if line[0].isdigit() and line[1] == ".":
-            trimmed_list_item = line[2:]
-            list_item = HTMLNode("li", trimmed_list_item)
-            if children is None:
-                children = [HTMLNode('li', list_item)]
-            else:
-                children.append(HTMLNode('li', list_item))
-    ordered_list = ParentNode("ol", block, children)
-    return ordered_list
+    items = block.split("\n")
+    html_items = []
+    for item in items:
+        text = item[3:]
+        children = convert_text_to_children(text)
+        html_items.append(ParentNode("li", children))
+    return ParentNode("ol", html_items)
 
-# convert string to string
-# convert blocks to block
-# identify block type
-# convert block to html node
-# identify text types
-# which function finds and converts inline markdown?
-# do it before or after block conversion?
 
 def markdown_to_html_node(markdown):
     children = []
