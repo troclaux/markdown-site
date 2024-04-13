@@ -87,17 +87,14 @@ def convert_quote_block_to_htmlnode(block):
 def convert_unordered_list_to_htmlnode(block):
     if block_to_block_type(block) != block_type_unordered_list:
         raise ValueError(f"Block is not an unordered list: {block}")
-    children = []
-    for line in block.split("\n"):
-        if line.startswith("- "):
-            trimmed_list_item = line[2:]
-            list_item = HTMLNode("li", trimmed_list_item)
-            if children is None:
-                children = [HTMLNode('li', list_item)]
-            else:
-                children.append(HTMLNode('li', list_item))
-    unordered_list = HTMLNode("ul", block, children)
-    return unordered_list
+    items = block.split("\n")
+    html_items = []
+    for item in items:
+        text = item[2:]
+        children = convert_text_to_children(text)
+        html_items.append(ParentNode("li", children))
+    return ParentNode("ul", html_items)
+
 
 def convert_ordered_list_to_htmlnode(block):
     if block_to_block_type(block) != block_type_ordered_list:
