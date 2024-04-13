@@ -67,8 +67,9 @@ def convert_heading_block_to_htmlnode(block):
 def convert_code_block_to_htmlnode(block):
     if block_to_block_type(block) != block_type_code:
         raise ValueError(f"Block is not a code block: {block}")
-    code_block = HTMLNode("code", block)
-    return HTMLNode("pre", children=code_block)
+    code_block = ParentNode("code", block)
+    return ParentNode("pre", children=code_block)
+
 
 def convert_quote_block_to_htmlnode(block):
     if block_to_block_type(block) != block_type_quote:
