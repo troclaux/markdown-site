@@ -93,17 +93,17 @@ this is paragraph text
         md = """
 > This is a
 > blockquote block
+> finally
 
 this is paragraph text
 
         """
 
         node = markdown_to_html_node(md)
-        print("node:", node)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
+            "<div><blockquote>This is a blockquote block finally</blockquote><p>this is paragraph text</p></div>",
         )
 
 
