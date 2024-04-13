@@ -1,5 +1,5 @@
 from parentnode import ParentNode
-from htmlnode import HTMLNode
+from textnode import *
 
 
 block_type_paragraph = "paragraph"
@@ -8,6 +8,7 @@ block_type_code = "code"
 block_type_quote = "quote"
 block_type_unordered_list = "unordered_list"
 block_type_ordered_list = "ordered_list"
+
 
 def markdown_to_blocks(markdown):
     res = []
@@ -18,6 +19,7 @@ def markdown_to_blocks(markdown):
     if res[-1] == "":
         res.pop()
     return res
+
 
 def block_to_block_type(block):
     if block.startswith("#"):
@@ -79,7 +81,6 @@ def convert_quote_block_to_htmlnode(block):
     for line in lines:
         if line[:2] == "> ":
             joined_lines += line[1:]
-    # block = " ".join(lines)
     children = convert_text_to_children(joined_lines[1:])
     return ParentNode("blockquote", children)
 
