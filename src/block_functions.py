@@ -111,7 +111,6 @@ def convert_ordered_list_to_htmlnode(block):
 def markdown_to_html_node(markdown):
     children = []
     blocks = markdown_to_blocks(markdown)
-    elements = '<div>'
     for block in blocks:
         block_type = block_to_block_type(block)
         if block_type == block_type_paragraph:
@@ -126,7 +125,4 @@ def markdown_to_html_node(markdown):
             children.append(convert_unordered_list_to_htmlnode(block))
         elif block_type == block_type_ordered_list:
             children.append(convert_ordered_list_to_htmlnode(block))
-
-
-    elements += '</div>'
-    top_level_node = ParentNode('div', children)
+    return ParentNode("div", children)
