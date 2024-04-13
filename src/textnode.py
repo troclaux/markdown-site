@@ -1,4 +1,4 @@
-from leafnode import LeafNode
+from leafnode import *
 from extract_markdown import *
 
 text_type_text = "text"
