@@ -59,7 +59,10 @@ def convert_heading_block_to_htmlnode(block):
     while block[level] == "#":
         level += 1
     tag = f"h{level}"
-    return HTMLNode(tag, block)
+    heading_text = block[level + 1 :]
+    children = convert_text_to_children(heading_text)
+    return ParentNode(tag, children)
+
 
 def convert_code_block_to_htmlnode(block):
     if block_to_block_type(block) != block_type_code:
