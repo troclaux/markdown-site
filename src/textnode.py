@@ -26,23 +26,26 @@ class TextNode:
             return True
 
     def __repr__(self):
-        return f'TextNode({self.text}, {self.text_type}, {self.url})'
+        return f"TextNode({self.text}, {self.text_type}, {self.url})"
 
 
-def text_node_to_html_node(text_node):
+def text_node_to_leaf_node(text_node):
+    """
+    Converts a TextNode to a LeafNode
+    """
     if text_node.text_type == text_type_text:
         return LeafNode(None, text_node.text)
     if text_node.text_type == text_type_bold:
-        return LeafNode('b', text_node.text)
+        return LeafNode("b", text_node.text)
     if text_node.text_type == text_type_italic:
-        return LeafNode('i', text_node.text)
+        return LeafNode("i", text_node.text)
     if text_node.text_type == text_type_code:
-        return LeafNode('code', text_node.text)
+        return LeafNode("code", text_node.text)
     if text_node.text_type == text_type_link:
-        return LeafNode('a', text_node.text, {"href": text_node.url})
+        return LeafNode("a", text_node.text, {"href": text_node.url})
     if text_node.text_type == text_type_image:
         props = {"src": text_node.url, "alt": text_node.text}
-        return LeafNode('img', '', props)
+        return LeafNode("img", "", props)
     raise Exception(f"Invalid text type: {text_node.text_type}")
 
 
@@ -58,17 +61,17 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         if len(split_text) == 1:
             res.append(node)
         elif (len(split_text) % 2) == 0:
-            err_msg = f'{text_type} delimiter not closed ({delimiter})'
+            err_msg = f"{text_type} delimiter not closed ({delimiter})"
             raise Exception(err_msg)
         elif (len(split_text) % 2) == 1:
             for idx in range(0, len(split_text)):
                 curr_text = split_text[idx]
-                if (idx % 2 == 0) and (curr_text != ''):
+                if (idx % 2 == 0) and (curr_text != ""):
                     res.append(TextNode(curr_text, text_type_text))
-                elif (idx % 2 == 1) and (curr_text != ''):
+                elif (idx % 2 == 1) and (curr_text != ""):
                     res.append(TextNode(curr_text, text_type))
         else:
-            raise Exception('Invalid split_text length')
+            raise Exception("Invalid split_text length")
     return res
 
 
@@ -124,6 +127,7 @@ def split_nodes_link(old_nodes):
         if original_text != "":
             new_nodes.append(TextNode(original_text, text_type_text))
     return new_nodes
+
 
 def text_to_textnodes(text):
     nodes = [TextNode(text, text_type_text)]
