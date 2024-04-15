@@ -25,8 +25,16 @@ def copy_dir_content(src, dest):
     print(f"creating {dest} folder")
     os.mkdir(dest)
     for item in os.listdir(src):
-        source_item_path = f"{src}/{item}"
+        source_item_path = os.path.join(src, item)
+        destination_item_path = os.path.join(dest, item)
         if os.path.isfile(source_item_path):
+            print(f"copying {source_item_path} to {destination_item_path}")
+            shutil.copy(source_item_path, destination_item_path)
+        else:
+            print(f"copying {source_item_path} directory to {destination_item_path}")
+            copy_dir_content(source_item_path, destination_item_path)
+
+
             print(f"copying {source_item_path} to {dest}")
             shutil.copy(source_item_path, dest)
         else:
