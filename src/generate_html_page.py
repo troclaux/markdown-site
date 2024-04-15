@@ -35,11 +35,15 @@ def copy_dir_content(src, dest):
             copy_dir_content(source_item_path, destination_item_path)
 
 
+def generate_pages_recursive(src, templ, dest):
+    for item in os.listdir(src):
+        source_item_path = os.path.join(src, item)
+        if os.path.isfile(source_item_path) and item[-3:] == ".md":
             print(f"copying {source_item_path} to {dest}")
-            shutil.copy(source_item_path, dest)
+            generate_page(source_item_path, templ, f"{dest}/{item[:-3]}.html")
         else:
             print(f"copying {source_item_path} directory to {dest}")
-            copy_dir_content(source_item_path, f"{dest}/{item}")
+            generate_pages_recursive(source_item_path, templ, f"{dest}/{item}")
 
 
 def extract_title(markdown):
