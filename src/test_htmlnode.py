@@ -4,14 +4,13 @@ from htmlnode import HTMLNode
 
 
 class TestTextNode(unittest.TestCase):
-
     def test_tag(self):
         n1 = HTMLNode(tag="p", value="Text in paragraph", props={"id": "main"})
-        self.assertEqual(n1.tag, 'p')
+        self.assertEqual(n1.tag, "p")
 
     def test_value(self):
         n1 = HTMLNode(tag="p", value="Text in paragraph", props={"id": "main"})
-        self.assertEqual(n1.value, 'Text in paragraph')
+        self.assertEqual(n1.value, "Text in paragraph")
 
     def test_children(self):
         n1 = HTMLNode(tag="p", value="Text in paragraph", props={"id": "main"})
