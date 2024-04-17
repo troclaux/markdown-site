@@ -7,7 +7,9 @@ This is a simple markdown site generator. It reads a markdown file and generates
 ## Usage
 
 1. Clone the repository
-```git clone https://github.com/troclaux/markdown-site```
+```
+git clone https://github.com/troclaux/markdown-site
+```
 2. Place the markdown file in the content directory
 3. Place the css file in the static directory
 4. Run the main.sh script
